@@ -1,0 +1,12 @@
+stockName,country
+Apple,US
+MarshalWays,UK
+JP Morgan,US
+Google,US
+Microsoft,US
+UBS,Switzerland
+Goldman Sachs,US
+GAM,US
+SATYASOFT,India
+RAVI,India
+MyTEST,India

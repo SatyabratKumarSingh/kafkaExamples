@@ -15,7 +15,7 @@ object KafkaStreamAverageCalculation extends App{
   startKafkaStreaming()
 
   def startKafkaStreaming()={
-    val conf = new SparkConf().setMaster("local").setAppName("Average Price Calculator")
+    val conf = new SparkConf().setMaster("local[5]").setAppName("Average Price Calculator")
       .set("spark.driver.allowMultipleContexts","true")
     val sparkContext = new SparkContext(conf)
     val sparkStreamingContext = new StreamingContext(sparkContext, Seconds(10))

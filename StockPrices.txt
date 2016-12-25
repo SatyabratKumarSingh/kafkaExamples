@@ -1,0 +1,11 @@
+Apple,21.09
+MarshalWays,10.09
+JP Morgan,11.2,
+Google,7.89
+Microsoft,12.0999
+UBS,89.0099
+Goldman Sachs,89.009
+GAM,14.877777
+SATYASOFT,89.009
+RAVI,89.000,
+MyTEST,1.00
