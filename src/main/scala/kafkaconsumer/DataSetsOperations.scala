@@ -42,11 +42,36 @@ object DataSetsOperations extends App{
     .map(row=> StockCountry(row.get(0).asInstanceOf[String],
       row.get(1).asInstanceOf[String]))
 
+  import org.apache.spark.sql.functions._
 
    val stockWithCountries = unionOfStocks.
      join(stockCountries,unionOfStocks("stockName") === stockCountries("stockName"))
 
-    
-  stockWithCountries.show()
+
+  val averageDataFrame = stockWithCountries.map(x=>new Stock(x.getString(0) ,x.getDecimal(1))).
+    groupBy($"stockName").
+    agg(avg($"price").alias("Average Price"))
+
+
+  // When you have RDD
+  val averageDataFrameByOtherMethod = stockWithCountries.
+    map(x=>new Stock(x.getString(0) ,x.getDecimal(1))).rdd.groupBy(x=>x.stockName).
+    map(x => (x._1, average(x._2)))
+
+
+
+    averageDataFrame.show()
+
+  averageDataFrameByOtherMethod.collect().foreach(x=>println(x))
+
+  def average(stocks: Iterable[Stock] ): BigDecimal = {
+    var sum = BigDecimal(0);
+     for(stock <- stocks){
+      sum =  stock.price + sum
+     }
+    sum / stocks.size
+  }
 
 }
+
+
